@@ -10,10 +10,15 @@
         let value = [1,-4,-20,30,-87,21]
         function wheatFromChaff(values) {
             const o = [...values];//развернуть массив
+            //пока tail меньше head повторять цикл
             for (let head = 0, tail = values.length - 1; head < tail; head++, tail --){//
-                while (values[head] < 0) head++;
-                while (values[tail] > 0) tail--;
+                //проверка по очереди
+                //console.log(head)
+                while (values[head] < 0) head++;//если значения массива меньше нуля прибавить к head 1
+                
+                while (values[tail] > 0) tail--;//если значение 
                 if (head < tail) [o[head], o[tail]] = [o[tail], o[head]];
+                console.log([o[head], o[tail]] = [o[tail], o[head]])
             }
             return o;
         }
