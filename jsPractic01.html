@@ -14,9 +14,10 @@
             for (let head = 0, tail = values.length - 1; head < tail; head++, tail --){//
                 //проверка по очереди
                 //console.log(head)
+                //условия для пропуска (поменять местами)
                 while (values[head] < 0) head++;//если значения массива меньше нуля прибавить к head 1
-                
                 while (values[tail] > 0) tail--;//если значение 
+                
                 if (head < tail) [o[head], o[tail]] = [o[tail], o[head]];
                 console.log([o[head], o[tail]] = [o[tail], o[head]])
             }
@@ -29,12 +30,79 @@
             for(let i = 0, j = arr.length-1; i < j; i++, j--){
                 [arr[i], arr[j]] = [arr[j], arr[i]];//развернуть массив
             }
+            return arr;
+        }
+        console.log(reverse(value));
+        
+        function reverse2(arr){
+            for(let i = 0, j = arr.length -1; i < j; i++, j--){
+                
+                while(value[i] < 0) i++;//найти число больше 0 (цыкл пока не найдет число больше 0)
+                while(value[j] > 0) j--;//найти число меньше 0 (цыкл пока не найдет число больше 0)
+                [arr[i], arr[j]] = [arr[j], arr[i]];//asfasf
+            }
+            return arr;
+        }
+        console.log(reverse2(value));
+
+        function reverse3(arr){
+            for(let i = 0,j = arr.length-1; i < j; i++,j--){
+                [arr[i],arr[j]] = [arr[j],arr[i]]
+            }
+            return arr;
+        }
+        console.log(`reverse3 ${reverse3(value)}`)
+
+        function wheatFromChaff2(arr){
+            for(let i = 0, j = arr.length-1;i < j ;i++,j--){
+                while(arr[i] < 0) i++;
+                while(arr[j] > 0) j--;
+                
+                if(i<j)[arr[i],arr[j] = arr[j],arr[i]]
+            }
             return arr
         }
-       
-
+        console.log(wheatFromChaff2(value))
         
-        console.log(reverse(value));
+        //value = [1,-4,-20,30,-87,21]
+        function wheatFromChaff3(values){
+            let [i, j] = [0, values.length -1];
+            let vals = values.slice();//копирует массив values;
+
+            while (i < j){//пока i < j
+                if (vals[i] < 0){//eсли vals[i] < 0 
+                    i += 1;
+                }else if (vals[j] > 0){
+                    j -= 1;
+                }else {
+                    [vals[i], vals[j]] = [vals[j], vals[i]];
+                    [i, j] = [i + 1, j - 1];
+                }
+            }
+            return vals;
+        }
+        let [i, j] = [7,2];
+        let vals = value.slice()
+        console.log("test",vals)
+
+
+        function wheatFromChaff4(values){
+            let vals = values.slice();
+            let [i,j] = [0,values.length -1];
+            
+            while(i < j){
+                if (vals[i] < 0){ 
+                    i++
+                }else if (vals[j] > 0){ 
+                    j--
+                }else {
+                    [vals[i],vals[j]] = [vals[j],vals[i]];
+                    [i, j] = [i + 1, j - 1];
+                }
+            }
+            return vals;
+        }
+        console.log(wheatFromChaff4(value))
     </script>
 </body>
 </html>
