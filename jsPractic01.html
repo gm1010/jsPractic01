@@ -104,6 +104,64 @@
         }
         /////////22131313213131313wewrwrwrwr
         console.log(wheatFromChaff4(value))
+
+        function wheatFromChaff5(value){
+            for(let i = 0, j = value.length -1; i < j;i++, j--){
+                while (value[i] < 0) i++;
+                while (value[j] > 0) j--;
+
+                if (i < j)[value[i],value[j]] = [value[j],value[i]];
+
+            }
+            return value
+        }
+        console.log(wheatFromChaff6(value));
+        
+        function wheatFromChaff6(value){
+            let [i, j] = [0, value.length-1]
+            let arr = value.slice();
+
+            while(i<j){
+                if (arr[i] < 0){ 
+                    i++;
+                }else if (arr[j] > 0){
+                    j--;
+                }else {
+                    [arr[i],arr[j]] = [arr[j],arr[i]];
+                    [i,j] = [i]
+                }
+            }
+
+
+            return arr;
+        }
+        //value = [1,-4,-20,30,-87,21]
+        function wheatFromChaff6(values){
+            for (let i=0, j=values.length-1; i<j ; ++i, --j){
+                while (values[i] < 0 && i<j) ++i;
+                while (values[j] > 0 && i<j) --j;
+                if (i >= j) break;
+
+                const t = values[i];//t - save
+                values[i] = values[j];
+                values[j] = t;
+            }
+            return values;
+        }
+
+        function wheatFromChaff7(values){
+            for(let i = 0, j = values.length - 1;i<j;++i,--j){
+                while(values[i] < 0 && i<j) i++;
+                while(values[j] > 0 && i<j) j--;
+                if (i >= j) break;
+
+
+                const save = values[i];
+                values[i] = values[j];
+                values[i] = save;
+            }
+        }
+        console.log()
     </script>
 </body>
 </html>
