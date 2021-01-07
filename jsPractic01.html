@@ -7,7 +7,37 @@
 </head>
 <body>
     <script>
-   
+        // Your task is to write a higher order function for chaining together a list of unary functions.
+        // In other words, it should return a function that does a left fold on the given functions.
+        
+        //Ваша задача - написать функцию более высокого порядка для объединения в цепочку списка унарных функций.
+        //Другими словами, он должен возвращать функцию, которая выполняет левую складку для заданных функций.
+        
+        // chained([a,b,c,d])(input)
+        // d(c(b(a(input))))
+
+function f1(x){ return x*2 }
+function f2(x){ return x+2 }
+function f3(x){ return Math.pow(x,2) }
+
+function f4(x){ return x.split("").concat().reverse().join("").split(" ")}
+function f5(xs){ return xs.concat().reverse() }
+function f6(xs){ return xs.join("_") }
+
+// Test.assertEquals( chained([f1,f2,f3])(0), 4 )
+// Test.assertEquals( chained([f1,f2,f3])(2), 36 )
+// Test.assertEquals( chained([f3,f2,f1])(2), 12 )
+
+// Test.assertEquals(chained([f4,f5,f6])("lorem ipsum"), "merol_muspi")
+
+
+function chained1(functions) {//function - arr
+    //return functions.map(v => v+=v);
+    //return functions.reduce((sum,val) => {sum += val;return sum},0);
+    return x => functions.reduce((sum,val) => {sum += val(x=sum);return sum},0)
+}
+console.log(chained1([f1,f2,f3])(0))
+console.log(Math.pow(2,2))
     </script>
 </body>
 </html>
