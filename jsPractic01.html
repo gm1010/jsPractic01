@@ -7,45 +7,7 @@
 </head>
 <body>
     <script>
-        var trueIfEven = function(v, i) { return v % 2 === 0; }
-        var neverTrue = function(v, i) { return false; }
-        var trueIfValueEqualsIndex = function(v, i) { return v === i; }
-        var trueIfLengthEqualsIndex = function(v, i) { return v.length === i; }
-        var arr = [1,3,5,6,7];
-        var findInArray = function(array, iterator) {
-            // while(array.length > 0){
-                
-            // }
-            // for (let i = 0, v = array[i]; iterator(v,i) === false;i++){
-                
-            // };
-             for (let i = 0; i < array.length-1;i++){
-                if (iterator(array[i],i) === true) return i;
-                
-            };
-            return -1;
-        };
-        var findInArray2 = function(array, iterator){
-            return array.findIndex(iterator);
-        }
-        console.log(findInArray(arr,trueIfLengthEqualsIndex));
-        console.log(findInArray2(arr,trueIfEven));
-        var findInArray3 = function(array, iterator){
-            console.log(array.map(iterator).indexOf(true));//возвращается массив из fals и true, возвращается индекс true;
-        }
-        console.log(findInArray3(arr,trueIfEven));
-
-
-
-        var findInArray3 = function(array, iterator){
-            arr.map(iterator).indexOf(true);
-        }
-        var findInArray4 = function(array, iterator){
-            arr.map(iterator).indexOf(true);
-        }
-        var findInArray5 = function(array, iterator){
-            arr.findIndex(iterator);
-        }
+   
     </script>
 </body>
 </html>
