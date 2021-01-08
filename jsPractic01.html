@@ -34,10 +34,21 @@ function f6(xs){ return xs.join("_") }
 function chained1(functions) {//function - arr
     //return functions.map(v => v+=v);
     //return functions.reduce((sum,val) => {sum += val;return sum},0);
-    return x => functions.reduce((sum,val) => {sum += val(x=sum);return sum},0)
+    return x => functions.reduce((sum,val,i) => {if(i>0)x = sum; sum = val(x); return sum},0);
 }
-console.log(chained1([f1,f2,f3])(0))
-console.log(Math.pow(2,2))
+function chained2(functions) {//function - arr
+   return function(x) {
+        let sum = 0
+        for(let i = 0; i < functions.length;i++){
+            sum = functions[i](x);
+            console.log(sum);
+            x = sum;
+   };
+   return sum;
+    };
+}
+console.log(chained1([f1,f2,f3])(2))
+console.log(`ch2 ${chained2([f1,f2,f3])(2)}`)
     </script>
 </body>
 </html>
