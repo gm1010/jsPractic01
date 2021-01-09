@@ -49,6 +49,52 @@ function chained2(functions) {//function - arr
 }
 console.log(chained1([f1,f2,f3])(2))
 console.log(`ch2 ${chained2([f1,f2,f3])(2)}`)
+
+function chained3(functions){
+    return function(input){
+        return functions.reduce(function(input, fn){return fu(input)}, input);
+    }
+}
+
+
+function chained4(functions){
+    return function(input){
+        return functions.reduce(function(input, fn){return fn(input)},input);
+    }
+}
+
+
+console.log(chained4([f1,f2,f3])(2));
+
+function chained5(functions){
+    return input => functions.reduce((res, func) => func(res), input);
+}
+
+// function chained6(functions){
+//     return function(x){
+//         for  (var f of function){//цикл обьхода итерируемых обьектов
+//             x = f(x);
+//         }
+//     }
+//     return x;
+// }
+
+function chained6(functions){
+    return function(input){
+        for(x of functions){
+            input = x(input);
+        }
+        return input;
+    }
+}
+console.log('6',chained6([f1,f2,f3])(2));
+const chained = functions => (agr) => functions.reduce((x,y) => y(x), agr);
+const test1 = functions => arg => test1.reduce((x,y)=>y(x),arg);
+
+function chained7(functions){
+    return [].reduce.bind(functions, function(result, fn){return fn(result);})
+}
     </script>
+    
 </body>
 </html>
