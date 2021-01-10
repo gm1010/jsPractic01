@@ -7,7 +7,56 @@
 </head>
 <body>
     <script>
-        //lamda - функция без названия
+        // //lamda - функция без названия
+        // (f) => (g)
+        // function f(input){
+        //     return 2 * input + 3;
+           
+        // }
+        // function g(input){
+        //     return Math.pow(input,2);
+        // }
+        // console.log(g(f(2)))
+        // //Композиция - создания сложного функционала за счет обьединения более прострых функций.Это вложения функций, каждая из которых передает свой результат в качестве входных данных для других функций
+
+        // const a = x => x + 2;
+        // const b = x => x * 3;
+
+        // //Композиция это акт обьединения в следствии которого выходные данные одной функции становятся входными данными слудующей.
+
+        // console.log(a(b(5)));
+
+        // const upperCase = str => str.toUpperCase();
+        // const exclaim = str => `${str}!`;
+        // const repeat = str => `${str} `.repeat(3);
+
+        // console.log(
+        //     repeat(exclaim(upperCase('I love coding')))//repeat возвращает
+        // )
+
+        // //const compose = (...fns) => x => fns.reduceRight(());
+
+        // const compose1 = (...fns) => x => fns.reduceRight((acc, fn) => fn(acc), x);
+
+        // const withCompose = compose1(
+        //     repeat,
+        //     exclaim,
+        //     upperCase
+        // );
+        // console.log(withCompose('I love coding'));
+
+        add1 = function(a){return a + 1}
+        id = function(a){return a}
+        
+        function compose(f,g) {
+             //const com = f(g(a));
+            //const com2 = f
+             return c => f(g);
+          
+  // Compose the two functions here!
+        };
+        console.log(compose(add1,id)(0));
+        //fetch получить
     </script>
 
 </body>
