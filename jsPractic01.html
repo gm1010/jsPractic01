@@ -51,12 +51,23 @@
         function compose(f,g) {
              //const com = f(g(a));
             //const com2 = f
-             return c => f(g);
+            //const c = f;
+            //return input => f(g(input));
+            //return args.map(x => x);
+            for(let i = 1;i < arguments.length;i++){
+                `${arguments[0]}()`
+            }
+            return arguments[2];
           
   // Compose the two functions here!
         };
-        console.log(compose(add1,id)(0));
+        console.log(compose(add1,id));//вызывается функция compose c параметрами, вызывается функция input спараметром 0, функция input возвращает функцию add1, вызывается функция add1 с параметром функции id, вызывается функция 
         //fetch получить
+    
+    const f = x => 3 * x + 2;
+    const g = x => x + 5;
+    g(f())
+    console.log(g(f(1)))
     </script>
 
 </body>
