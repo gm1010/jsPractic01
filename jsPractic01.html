@@ -44,26 +44,54 @@
         //     upperCase
         // );
         // console.log(withCompose('I love coding'));
-
+        //Параметры затаются при определении функции, аргументы это реальные значения передаваеммые и получаемые функцией
         add1 = function(a){return a + 1}
+        add2 = function(a){return a + 10}
         id = function(a){return a}
         
-        function compose(f,g) {
+        function compose(...arr) {
              //const com = f(g(a));
             //const com2 = f
             //const c = f;
             //return input => f(g(input));
             //return args.map(x => x);
-            for(let i = 1;i < arguments.length;i++){
-                `${arguments[0]}()`
-            }
-            return arguments[2];
+            // for(let i = 1;i < arguments.length;i++){
+            //     `${arguments[0]}()`
+                
+            // }
+            //arr = [...arguments];
+            //let p = 0;
+            
+            // return function(...p) {
+            //     let result = arr[arr.length-1](...p);
+            //     for(let i = arr.length-2;i >= 0;i--){
+            //         result = arr[i](result);
+            //     }
+            //     return result
+            //     }
+            
+            
+            //return result;
+            
+            //return result;
           
   // Compose the two functions here!
         };
-        console.log(compose(add1,id));//вызывается функция compose c параметрами, вызывается функция input спараметром 0, функция input возвращает функцию add1, вызывается функция add1 с параметром функции id, вызывается функция 
+        function compose2(f, g){
+            return function(){
+                
+                console.log(this);
+                return f(g.apply(this, arguments));
+            }
+        }
+        function compose3(a){
+            return a + 1;
+        }
+        console.log(1.apply(console3, arguments))
+        console.log(compose2(add1,id)(4));
+        //console.log(compose(add1,add2,id)(1));//вызывается функция compose c параметрами, вызывается функция input спараметром 0, функция input возвращает функцию add1, вызывается функция add1 с параметром функции id, вызывается функция 
         //fetch получить
-    
+        //
     const f = x => 3 * x + 2;
     const g = x => x + 5;
     g(f())
