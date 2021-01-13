@@ -7,7 +7,17 @@
 </head>
 <body>
     <script>
-  
+        //In this kata, you will create a simple, immutable, singly-linked list.
+        //mutable
+        var mutableArr = [1,2,3,4,5];
+        mutableArr.push(5);
+        console.log(mutableArr);
+
+        //use seabless - immutable.js
+        var immutableArr = Immutable([1,2,3,4]);
+        var newImmutableArr = immutableArr.concat([5]);
+        console.log(immutableArr);
+        console.log(newImmutableArr);
     </script>
 
 </body>
