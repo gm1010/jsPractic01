@@ -7,136 +7,112 @@
 </head>
 <body>
     <script>
-        //In this kata, you will create a simple, immutable, singly-linked list.
-        //mutable
-        
-        //Проблемма перерезаписывании данных
-        const a = [1,2,3];
-        const b = a;
-        b.push(4);
-        console.log(a === b);//
-        
-        const c = {name: 'Alex'};
-        const d = a;
-        b.name = 'Julia';
-        console.log(a.name);
+        /*Связанный список это структура данных где несколько значений хранятся линейно
+            Наиболее важной частью списка является структура узлов
+            Каждый узел должен содержать некоторые данные и указывать на следующий узел в списке
 
-        //immutable функция высшего порядка push
+            Узел имеет две части информации
+            ссылка на следующий узел next
+            значение узла value
 
-        const push = value => array => {
-            const clone = [...array];
-            clone.push(value);
-            return clone;
-        };
-        
-        const i = push(5)(a);
-        console.log(i === a);
+            Также он будет содержать один метод - toString: который возвращает значение в строке
 
-        //--Классы 
-        class MyClass{
-            //методы класса
-            constructor() {}
-            method1(){}
-            method1(){}
-            method1(){}
-            method1(){}
-        }
-        class User {//класс это разновидность функции
-            constructor(name){this.name = name;}
-            sayHi(){console.log(this.name)}
-        }
-        /*создает функцию с именем user котора становистя результатом обьявления класса
-        Код функции берется из метода constructor
-        Сохраняется все методы, такие как sayHi в User.prototype
+            Когда экземпляр класса linkedListNode сформирован, вызывается функция конструкто, чтобы
+            инициализировать обьект с двумя свойствами 
         */
+       class linkedListNode {
+           constructor(value, next = null){
+               this.value = value;
+               this.next = next;
+           }
 
-
-
-
-        //Когда мы делаем обновление данных мы хотим совершенно новую структуру данных
-        //Которая содержит все элементы предыдущего состаяния а также наши обнавления
-
-        //метод push это мутация в массиве он изменяет все ссылки на тотже массив
-
-
-        //--Прототипное наследование
-        let animal = {
-            eats: true,
-            walk(){
-                console.log('Animal Walk')
-            }
-        };
-        let rabbit = {
-            jumps: true,
-            
-            __proto__:animal//значение __proto__ может быть обьект или null
-        };
-        
-        rabbit.__proto__= animal;
-        console.log(rabbit.walk())//walk унаследованна у 
-        /*сылки не могут идти по кругу
-        может быть только 1 [[Prototype]].Обьект не может наследовать от двух других обьектов
-
-        Операции записи не используют прототип
-        Прототип используется только для чтения свойств
-        Операции записи удаления работают только на прямую с обьектом
-        */
-       let animal2 = {
-           eats:true,
-           walk(){
-               //этот метод не будет использоваться в rabbit
+           toString(callback){
+               return callback ? callback(this.value) : `${this.value}`;
+           }
+    }
+       class LinkedList{
+           constructor(){
+               this.head = null;
+               this.tail = null;
            }
        }
-       let rabbit2 = {
-           __proto__:animal2
-       };
+       prepend(value){
+        //создает новый узел, который  будет новым head
+        //при создании передает второй аргумент, который указывает
+        //что его 'next' будет текущий head.
+        //так как его узел будет стоять перед текущим head.
+       
+       const newNode = new LinkedListNode(value, this.head);
 
-       rabbit.walk = function(){//добавить в обьект rabbit метод walk
-           console.log('Rabbit! Bounce-Bounce!');
-       };
-       rabbit.walk();//Rabbit! Bounce-Bounce!
+       //Переназначаем head на новый узел
+       this.head = newNode;
 
-
-       //--F.prototype
-       let animal3 = {
-           eats: true
-       };
-
-       function Rabbit3(name){
-           this.name = name;
-       }
-
-       Rabbit3.prototype = animal3;
-
-       let rabbit4 = new Rabbit3('White Rabbit');// rabbit.__proto__== animal
-       //Установка Rabbit.prototype = animal - при создании обьекта через new Rabbit() запшите ему animal в [[Prototype]]
-       /*F.prototype используется только при вызове new f() и присваевается в качестве свойства [[Prototype]] нововго обьекта
-
-       */
-        // class mutableGlass{
-        //     constructor(content, amount){
-        //         this.content = content;
-        //         this.amount = amount;
-        //     }
-        //     takeDink(value){
-        //         this.amount = Math.max(this.amount - value, 0);
-        //         return this;
-        //     }
-        // }
-        // const mg1 = new MutableGlass('water', 100);
-        // const mg2 = mg1.takeDink(20);
-        // console.log(mg1 === mg2);
-        // console.log(mg.amount === mg2.amount);
-        //-----------------------------------------------------
-        function List() {
-            
+       //Если еще нет tail, делаем новый узел tail.
+        if (!this.tail){
+            this.tail = newNode;
         }
 
-        function EmptyList() {}
-        EmptyList.prototype = new List();
-        EmptyList.prototype.constructor = EmptyList;
+        //Возвращаем весь список
+        return this;
+    }
+//Append метод принемает значения в качестве аргумента и создает новый узел с этим значением, помещая его в конец связанного списка.
+        append(value){
+            //создаем новый узел
+            const newNode = new LinkedListNode(value);
 
-        EmptyList.prototype.toString = function(){}
+            //Если нет head и tail делаем новым узлом head и tail.
+            if (!this.head || !this.tail){
+                this.head = newNode;
+                this.tail = newNode;
+
+                return this;
+            }
+        
+        //Присоединяем новый узел к концу связонного списка
+        //Берем последний узел и указываем, что его next будет новым узлом.
+        this.tail.next = newNode;
+
+        //переназначаем tail на новый узел.
+        this.tail = newNode;
+
+        return this;
+        }
+        
+        //delete метод принемает значения в качестве аргумента, удаляет все узлы, которые имеют указанное значение и возращает последний удаленный узел.
+        delete(value){
+            //если нет head значит список пуст
+            if (!this.head){
+                return null;
+            }
+
+            let deletedNode = null;
+
+            //Если head должен быть удален, то делаем следующий узел новым head.
+            while (this.head && this.head.value === value){
+                deletedNode = this.head;
+            }
+
+            //Переназначаем следующий за head узел на новый head.
+            this.head = this.head.next;
+        }
+
+        let currentNode = this.head;
+
+        //Если следующий узел должен быть удален 
+        //Делаеи узел через один, следующим для проверки
+        //Перебераем все узлы и удаляем их если их значение равно указанному.
+        if(currentNode !==null){
+            while(currentNode.next){
+                if (currentNode.next.value === value){
+                    deletedNode = currentNode.next;
+                    //перезаписываем чтобы узел через один стал следующим узлом
+                    currentNode.next = currentNode.next.next;
+                }else{
+                    currentNode = currentNode.next;
+                }
+            }
+        }
+
     </script>
 
 </body>
