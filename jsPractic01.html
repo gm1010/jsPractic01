@@ -7,8 +7,46 @@
 </head>
 <body>
     <script>
-   
+    
+    let a = [];
+    function createMessage() {
+        
+        if (arguments.length > 0){
+            //console.log(a)
+            a.push(arguments[0]);
+            return createMessage;
+        }else{
+        return a.join(' ')}
+    }
+    function createMessage2(){
+        //console.log(1)
+        if(!arguments.length)return ''
+        let a = [arguments[0]];
+        
+        let message = function(){
+            if(arguments.length > 0){
+                a.push(arguments[0]);
+                return message
+            }else return a.join(' ')
+        
+        }
+       return message;
+       
+    }
+    //createMessage("Hello")("World!")("how")("are")("you?")() === "Hello World! how are you?"
+    function createMessage3(){
+        let test = function(a = arguments){
+            return a
+        }
+        let mes = (a) => a
+        return mes  //стрелочные функции не имеют своего собственного обьекта arguments
+        //return function(){return arguments}
+        //`${arguments[0]}`
+    }
 
+  
+
+    console.log(createMessage3('1234')("5679")())
     </script>
 
 </body>
