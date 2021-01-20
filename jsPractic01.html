@@ -35,18 +35,74 @@
     }
     //createMessage("Hello")("World!")("how")("are")("you?")() === "Hello World! how are you?"
     function createMessage3(){
-        let test = function(a = arguments){
-            return a
+        // let test = function(a = arguments){
+        //     return a
+        // }
+        let arr = [arguments[0]];
+        let message = (val) =>{
+            if (!val){
+                return arr.join(' ')
+            }else { 
+                arr.push(val);
+                return message
+            } 
+            
         }
-        let mes = (a) => a
-        return mes  //стрелочные функции не имеют своего собственного обьекта arguments
+        
+
+        return message
+        //стрелочные функции не имеют своего собственного обьекта arguments
         //return function(){return arguments}
         //`${arguments[0]}`
     }
-
+    function createMessage4(str){
+        return function(next){
+            if (next === undefined)return str;//если next === undefined вернуть str
+            return createMessage4(str+' '+ next)//вернуть createMessage4 с параметром str+' '+next
+        }
+    }
   
 
-    console.log(createMessage3('1234')("5679")())
+    console.log(createMessage4('1234')("5679")())
+
+
+    function createMessage5(str){
+        return function(next){
+            if(next === undefined)return str
+            return createMessage5(str+' '+next)//вызвать createMessage5 с параметром 
+        }
+    }
+    console.log(createMessage5('1234')("5679")())
+
+
+    let createMessage6 = (msg) => m => m? createMessage6(msg+' '+m) : msg;
+
+    function createMessage7(a){
+        return (n) => (n == undefined)? a: createMessage7(a+' '+n);
+    } 
+    
+
+    let createMessage8 = (msg) => (n) => n === undefined ? msg : createMessage8(msg+' '+n);
+
+
+    console.log(createMessage8('1234')("5679")())
+
+    function createMessage9(str){
+        return (a) => (a === undefined)? str : createMessage9(str+' '+a);
+    }
+
+    console.log(createMessage9('1234')("5679")())
+
+
+    function createMessage10(v){
+        var arr = [];
+        var f = (a) => a ? (arr.push(a), f) : arr.join(' ')
+    }
+
+    function createMessage11(...rest){
+        return rest
+    }
+    console.log(createMessage11('1234'))
     </script>
 
 </body>
