@@ -102,7 +102,15 @@
     function createMessage11(...rest){
         return rest
     }
-    console.log(createMessage11('1234'))
+    console.log(createMessage11('1234'))///////
+
+    function createMessage12(str){
+        return function(a){
+            if (a === undefined)return str;
+            return createMessage12(str+' '+a);
+        }
+    }
+    console.log(createMessage12('1234')("5679")())
     </script>
 
 </body>
