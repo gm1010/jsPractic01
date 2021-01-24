@@ -18,13 +18,57 @@
         function plus() {let a = arguments[0]; return function(){return arguments[0] + a}}
         function dividedBy() {let a = arguments[0]; return function(){return Math.round (arguments[0] / a)}}
         
+    
         
-        
-        //function minus() {num - arguments[0]}
+    //function four(){return 4};
+    // ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+    // .forEach(function(name, n){//n - число
+    //     this[name] = function (f){return f ? f(n) : n}//если f == undefinde то вернуть index
+    // });
+    
+    // function plus3(n) {return function(a) {return a + n} }//вернуть pluse(n) вернуть a + n
+    
+    // console.log(four(plus3(four())));
+    
+    // //this[four] = function (){return 5}
+    // this[four] = function (){return 5};
+    // console.log(this[four])
+    // console.log(zero())
+
+    
 
 
-        console.log(two(plus(three())))
-        console.log(two(dividedBy(three())))
+    // ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+    // .forEach(function(name, n){this[name] = function(f){return f? f(n):n}})
+
+    // function plus4(n){return function(a) {return a + n}};
+
+    // console.log(four(plus4(four())));
+
+
+    // 'zero one two three four five six seven eight nine'.split(' ').forEach(
+    //     (mth, num) => this[mth] = (f = val => val) => f(num)
+    // )
+    // let plus5 = (r) => (l) => l + r
+    // console.log(four(plus5(4)));
+    // console.log(four(plus5(four())));
+
+
+
+    'zero one two three four five six seven eight nine'.
+    split(' ').forEach((a,b) => this[a] = (f = (s) => s) => f(b))//this[a] = стрелочная функция аргумент f равен стр.ф (f = (s) => s) => f(b)
+
+    let op = function(r){return function(l) {return r + l}};
+    
+    console.log(five(op(five())))
+
+    const
+        id = x => x,
+        number = x => (f = id) => f(x),
+        [zero, one, two, three, four, five] = [0,1,2,3,4,5].map(number),
+
+
+
     </script>
 
 </body>
