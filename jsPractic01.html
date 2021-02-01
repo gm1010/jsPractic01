@@ -7,102 +7,47 @@
 </head>
 <body>
     <script>
-        /*Create a function runningAverage() that returns a callable function object. 
-        Update the series with each given value and calculate the current average.
+        function createFunctions(n) {
+        var callbacks = [];
+    
+        for (var i=0; i<n; i++) {
+            let index2 = ()=>{
+                let x = 0;
+                callbacks.push(function() {
+                return x;});
+            return ()=> x = i;}
+            index2()()
+        }
         
-        rAvg = runningAverage();
-        rAvg(10) = 10.0;
-        rAvg(11) = 10.5;
-        rAvg(12) = 11;
-
-        describe("Solution", function(){
-        it("Basic Tests", function(){
-            var rAvgSol = runningAverage();
-            Test.assertEquals(rAvgSol(10), 10);
-            Test.assertEquals(rAvgSol(11), 10.5);   
-            Test.assertEquals(rAvgSol(12), 11);   
-        });
-        });
-        */
-
-        //x + y / 2
-
-        //Функция запоминает окружение в котором она была создана
-        /*Другими словами, чтобы создать замыкание, ты должен вложить функцию в функцию, 
-        обратиться из вложенной функции к переменным оборачивающей, и вложенную функцию вернуть наружу. 
-        До тех пор, пока возвращенная функция остается в доступе, замыкание существует.
+        return callbacks;
+        }
         
-        Тут ещё самое важное то, что эту функцию можно передать куда угодно, и она может быть вызвана где угодно, 
-        но всё равно будет ссылаться именно на эту переменную. Эта связь как раз и есть замыкание.
+        function createFunctions(n) {
+            var callbacks = [];
 
-        var counter = (function () {
-            var current = 0;
-            return function () {
-                current++;
-                return current;
-            }
-        })();
-
-        console.log(counter()); // 1
-        console.log(counter()); // 2
-        */
-        function runningAverage() {
-            //let num = 0, counter = 1;
-            
-            
-            function closures(){
-                //let num = 0, counter = 1;
-                let num = 0;
+            for (let i=0; i<n; i++) {//let находится в локальной области видимости цикла for, переменная i видна только в нутри фигурных скобок
                 
-                return function (){
-                    num++;
-                    return num
-                }}
-
-            let x = closures()//
-            x()
-            console.dir(x)
-           return x
-        }
-        function runningAverage2(){
-            let num = 0, counter = 0;
-            let x = function(){
-                num += arguments[0];
-                counter += 2;
-                ///////////////////////
-                return Math.round((num / counter)*100)/100
-
-               
+                callbacks.push(function() {
+                return i;
+                });
+            
             }
             
-            return x
+        return callbacks;
         }
-        runningAverage4 = runningAverage2()
-        
-        runningAverage3 = (function(){
-            let num = 0;
-            let x = function(){
-                num += 1;
-                return num
-            }
-            return x
-        })()
-        //runningAverage(10)
-        console.log(runningAverage3(10))
-        console.log(runningAverage3(10))
-        console.log(runningAverage3(10))
-        console.log(runningAverage4(10))
-        console.log(runningAverage4(11))
-        console.log(runningAverage4(12))
-        console.log(runningAverage4(13))
-        
-        console.log(Math.round(112.1753 * 100)/100)
-        //console.log(11.234.toFixed(2))
-        //console.log(runningAverage(10))
-        // console.log(runningAverage(10))
-        // console.log(runningAverage(10))
-        ////////
-        ////////////////
+    
+    let createFunctions2 = (n) => Array.from(Array(n), (_, i) => () => i);//i создает замыкание
+    
+    var callbacks = createFunctions2(3)
+
+    console.log(callbacks[0]())
+    console.log(callbacks[1]())
+    console.log(callbacks[2]())
+
+    console.log(Array.from(Array(3),))
+
+    
+
     </script>
 
 </body>
