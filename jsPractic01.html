@@ -7,47 +7,43 @@
 </head>
 <body>
     <script>
-        function createFunctions(n) {
-        var callbacks = [];
-    
-        for (var i=0; i<n; i++) {
-            let index2 = ()=>{
-                let x = 0;
-                callbacks.push(function() {
-                return x;});
-            return ()=> x = i;}
-            index2()()
-        }
+        /*
+        In testing, a spy function is one that keeps track of various metadata regarding its invocations. 
+        Some examples of properties that a spy might track include:
         
-        return callbacks;
-        }
+        Whether it was invoked
+        How many times it was invoked
+        What arguments it was called with
+        What contexts it was called in
+        What values it returned
+        Whether it threw an error
         
-        function createFunctions(n) {
-            var callbacks = [];
-
-            for (let i=0; i<n; i++) {//let находится в локальной области видимости цикла for, переменная i видна только в нутри фигурных скобок
-                
-                callbacks.push(function() {
-                return i;
-                });
-            
+        
+        */
+        function adderSpy2(...a){
+            return a[0] + a[1]
+        }
+       
+        function spyOn (func) {
+            var c = 0;
+            function a(){
+                this.v1 = 10;
             }
+            return () => new a
             
-        return callbacks;
         }
-    
-    let createFunctions2 = (n) => Array.from(Array(n), (_, i) => () => i);//i создает замыкание
-    
-    var callbacks = createFunctions2(3)
-
-    console.log(callbacks[0]())
-    console.log(callbacks[1]())
-    console.log(callbacks[2]())
-
-    console.log(Array.from(Array(3),))
-
-    
-
+        var spy = spyOn(adderSpy2)
+        var obj = function (){
+            var x = {
+                v: 0,
+            }
+            return function (){}
+        }
+        console.log(obj())
+        console.log(spy())
+        //console.log(spy.allCount())
+        
+        console.log(adderSpy2(2,2))
     </script>
 
 </body>
