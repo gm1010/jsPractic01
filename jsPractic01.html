@@ -20,30 +20,37 @@
         
         
         */
-        function adderSpy2(...a){
-            return a[0] + a[1]
+        function adderSpy2(a,b){
+            return a + b
         }
        
-        function spyOn (func) {
-            var c = 0;
-            function a(){
-                this.v1 = 10;
-            }
-            return () => new a
+        function spyOn(func) {
             
-        }
-        var spy = spyOn(adderSpy2)
-        var obj = function (){
-            var x = {
-                v: 0,
+            let callCount = 0;
+            let wasCalledWith = [];
+            let returned = [];
+            
+            wrapper.callCount = () => callCount;
+            wrapper.wasCalledWith = (arg) => wasCalledWith.includes(arg);
+            wrapper.returned = (arg) => returned.includes(arg);
+            
+            function wrapper(){
+                var x = func.apply(0,arguments);
+                callCount++;
+                wasCalledWith.push(...arguments);
+                returned.push(x);
+                return x
             }
-            return function (){}
+            return wrapper
         }
-        console.log(obj())
-        console.log(spy())
+        var spy = spyOn(adderSpy2);
+       
+        
+        console.log(spy(1,2))
+        console.log(spy(5,3))
         //console.log(spy.allCount())
         
-        console.log(adderSpy2(2,2))
+       
     </script>
 
 </body>
